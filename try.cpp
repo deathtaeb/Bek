@@ -5,15 +5,15 @@
 int main(int argc, char **argv)
 {
     gmsh::initialize();
-    gmsh::model::add("torus.cpp");
+    gmsh::model::add("Ship");
     try {
-    gmsh::merge("../inventor.stl");
+    gmsh::merge("../flyer.stl");
   } catch(...) {
     gmsh::logger::write("Could not load STL mesh: bye!");
     gmsh::finalize();
     return 0;
   }
-    double angle = 5;
+    double angle = 20;
     bool forceParametrizablePatches = true;
     bool includeBoundary = true;
     double curveAngle = 180;
@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 
     gmsh::model::mesh::generate(3);
 
-    gmsh::write("torus.msh");
+    gmsh::write("flyer.msh");
     std::set<std::string> args(argv, argv + argc);
     if(!args.count("-nopopup")) gmsh::fltk::run();
 
